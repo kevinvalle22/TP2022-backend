@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.temporal.Temporal;
 import java.util.Date;
 
 @Service
@@ -54,7 +56,7 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         long duration = (endDate.getTime() - startDate.getTime()) / (60 * 60 * 1000);
         // convert to String
         String durationString = String.valueOf(duration);
-        sleepRecord.setDuration(durationString);
+        result.setDuration(durationString);
         return sleepRecordRepository.save(result);
     }
 
@@ -70,7 +72,6 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         // convert to String
         String durationString = String.valueOf(duration);
         sleepRecord.setDuration(durationString);
-
       
         return sleepRecordRepository.save(sleepRecord);
     }
