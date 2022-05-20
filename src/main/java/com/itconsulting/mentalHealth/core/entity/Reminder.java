@@ -11,28 +11,26 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "test_result")
+@Table(name = "reminder")
 @Data
-public class TestResult extends AuditModel {
-
+public class Reminder{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type", nullable = false)
-    private String type;
 
-    @Column(updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+
+    @Column(name = "reminderDate", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    @CreatedDate
-    private Date createdAt;
+    private Date reminderDate;
 
-    @Column(name = "score", nullable = false)
-    private String score;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @Column(name = "message", nullable = false,length = 256)
+    private  String message;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private DAOUser user;
+
 }
