@@ -35,7 +35,7 @@ public class ExerciseActivityController {
     }
 
     @GetMapping("/users/{userId}/exercises")
-    public Page<ExerciseActivityResource> getAllExerciseActivitysByUserId(@PathVariable(name = "userId") Long userId, Pageable pageable) {
+    public Page<ExerciseActivityResource> getAllExerciseActivitiesByUserId(@PathVariable(name = "userId") Long userId, Pageable pageable) {
         List<ExerciseActivityResource> resources = exerciseActivityService.getAllExerciseActivitiesByUserId(userId,pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
         int count = resources.size();
