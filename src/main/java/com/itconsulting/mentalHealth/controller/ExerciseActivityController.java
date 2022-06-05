@@ -51,7 +51,8 @@ public class ExerciseActivityController {
     @PostMapping("/users/{userId}/exercises")
     public ExerciseActivityResource createExerciseActivity(@PathVariable(name = "userId") Long userId,
                                    @Valid @RequestBody ExerciseActivityResource resource) {
-        return convertToResource(exerciseActivityService.saveExerciseActivity(convertToEntity(resource),userId));
+      Long exerciseActivityId=  exerciseActivityService.saveExerciseActivity(convertToEntity(resource),userId).getId();
+        return  convertToResource(exerciseActivityService.getTheDayOfWeek(exerciseActivityId,userId));
 
     }
     @PutMapping("/users/{userId}/exercises/{exerciseActivityId}")

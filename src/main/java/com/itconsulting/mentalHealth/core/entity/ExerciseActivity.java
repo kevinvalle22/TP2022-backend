@@ -24,7 +24,9 @@ public class ExerciseActivity {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date exerciseDate;
 
-
+    @Column(name = "dayOfTheWeek")
+    @JsonIgnore
+    private String dayOfTheWeek;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

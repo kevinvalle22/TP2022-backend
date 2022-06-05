@@ -5,6 +5,10 @@ import com.itconsulting.mentalHealth.core.repository.ExerciseActivityRepository;
 import com.itconsulting.mentalHealth.core.repository.UserRepository;
 import com.itconsulting.mentalHealth.core.service.ExerciseActivityService;
 import com.itconsulting.mentalHealth.exception.ResourceNotFoundException;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +34,17 @@ public class ExerciseActivityServiceImpl implements ExerciseActivityService {
     }
 
     @Override
+    public ExerciseActivity getTheDayOfWeek(Long exerciseActivityId, Long userId) {
+       ExerciseActivity exerciseActivity= exerciseActivityRepository.findByIdAndUserId(exerciseActivityId,userId).orElseThrow(() -> new ResourceNotFoundException("Registry not Found"+ exerciseActivityId
+                + " and UserId "+ userId));
+      // get the day of week
+      exerciseActivity.setDayOfTheWeek(String.valueOf(exerciseActivity.getExerciseDate().getDay()));
+
+
+        return exerciseActivityRepository.save(exerciseActivity);
+    }
+
+    @Override
     public ExerciseActivity getExerciseActivityByIdAndUserId(Long exerciseActivityId, Long userId) {
         return exerciseActivityRepository.findByIdAndUserId(exerciseActivityId,userId).orElseThrow(() -> new ResourceNotFoundException("Registry not Found"+ exerciseActivityId
                 + " and UserId "+ userId));
@@ -49,6 +64,7 @@ public class ExerciseActivityServiceImpl implements ExerciseActivityService {
     @Override
     public ExerciseActivity saveExerciseActivity(ExerciseActivity exerciseActivity, Long userId) {
         exerciseActivity.setUser(userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId)));
+
         return exerciseActivityRepository.save(exerciseActivity);
     }
 
