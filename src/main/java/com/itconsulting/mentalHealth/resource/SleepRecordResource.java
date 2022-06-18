@@ -1,6 +1,7 @@
 package com.itconsulting.mentalHealth.resource;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,5 +17,6 @@ public class SleepRecordResource {
 
     private String duration;
 
+    private String dayOfTheWeek;
 
 }

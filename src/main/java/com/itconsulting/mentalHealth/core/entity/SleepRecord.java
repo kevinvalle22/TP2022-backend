@@ -29,6 +29,9 @@ public class SleepRecord {
     @Column(name = "duration", nullable = false)
     @JsonIgnore
     private String duration;
+    @Column(name = "dayOfTheWeek")
+    @JsonIgnore
+    private String dayOfTheWeek;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

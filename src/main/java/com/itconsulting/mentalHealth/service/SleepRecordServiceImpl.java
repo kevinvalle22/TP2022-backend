@@ -2,21 +2,20 @@ package com.itconsulting.mentalHealth.service;
 
 import com.itconsulting.mentalHealth.core.entity.DAOUser;
 import com.itconsulting.mentalHealth.core.entity.SleepRecord;
-import com.itconsulting.mentalHealth.core.entity.TestResult;
 import com.itconsulting.mentalHealth.core.repository.SleepRecordRepository;
 import com.itconsulting.mentalHealth.core.repository.UserRepository;
 import com.itconsulting.mentalHealth.core.service.SleepRecordService;
 import com.itconsulting.mentalHealth.exception.ResourceNotFoundException;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.temporal.Temporal;
+import java.time.DayOfWeek;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Service
 public class SleepRecordServiceImpl implements SleepRecordService {
@@ -57,9 +56,25 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         // convert to String
         String durationString = String.valueOf(duration);
         result.setDuration(durationString);
+        result.setDayOfTheWeek(String.valueOf(sleepRecord.getStartDate().getDay()));
         return sleepRecordRepository.save(result);
     }
+    @Override
+    public SleepRecord getTheDayOfWeek(Long sleepRecordId, Long userId) {
+        SleepRecord sleepRecord= sleepRecordRepository.findByIdAndUserId(sleepRecordId,userId).orElseThrow(() -> new ResourceNotFoundException("Registry not Found"+ sleepRecordId
+                + " and UserId "+ userId));
+        // get the day of week
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(sleepRecord.getStartDate());
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+        //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
+        sleepRecord.setDayOfTheWeek(String.valueOf(dayOfWeek1));
 
+
+
+        return sleepRecordRepository.save(sleepRecord);
+    }
     @Override
     public SleepRecord saveSleepRecord(SleepRecord sleepRecord, Long userId) {
         DAOUser user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));

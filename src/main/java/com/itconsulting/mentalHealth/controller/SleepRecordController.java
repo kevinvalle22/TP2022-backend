@@ -48,7 +48,8 @@ public class SleepRecordController {
     @PostMapping("/users/{userId}/sleeps")
     public SleepRecordResource createSleep(@PathVariable(name = "userId") Long userId,
                                          @Valid @RequestBody SleepRecordResource resource) {
-        return convertToResource(sleepRecordService.saveSleepRecord(convertToEntity(resource),userId));
+        Long sleepRecordId=  sleepRecordService.saveSleepRecord(convertToEntity(resource),userId).getId();
+        return  convertToResource(sleepRecordService.getTheDayOfWeek(sleepRecordId,userId));
 
     }
     @PutMapping("/users/{userId}/sleeps/{sleepId}")

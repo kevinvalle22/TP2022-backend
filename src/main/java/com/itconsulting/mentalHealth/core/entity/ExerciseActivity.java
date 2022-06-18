@@ -18,15 +18,21 @@ public class ExerciseActivity {
     private Long id;
 
     @Column(name = "duration", nullable = false)
+    @JsonIgnore
     private String duration;
 
-    @Column(name = "exerciseDate", nullable = false)
+    @Column(name = "startDate", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date exerciseDate;
+    private Date startDate;
 
+    @Column(name = "endDate", nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private Date endDate;
     @Column(name = "dayOfTheWeek")
     @JsonIgnore
     private String dayOfTheWeek;
+    @Column(name = "message", nullable = false)
+    private String message;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
