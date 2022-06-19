@@ -48,7 +48,8 @@ public class AffirmationController {
     @PostMapping("/users/{userId}/affirmations")
     public AffirmationResource createAffirmation(@PathVariable(name = "userId") Long userId,
                                    @Valid @RequestBody AffirmationResource resource) {
-        return convertToResource(affirmationService.saveAffirmation(convertToEntity(resource),userId));
+        Long affirmationId = convertToResource(affirmationService.saveAffirmation(convertToEntity(resource),userId)).getId();
+        return convertToResource( affirmationService.getTheDayOfWeek(affirmationId,userId));
 
     }
     @PutMapping("/users/{userId}/affirmations/{affirmationId}")

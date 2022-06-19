@@ -19,7 +19,7 @@ public class Affirmation {
 
     @Column(name = "message", nullable = false)
     private String message;
-    @Column(name = "dayOfTheWeek", nullable = false)
+    @Column(name = "dayOfTheWeek")
     @JsonIgnore
     private String dayOfTheWeek;
     @Column(name = "affirmationDate", nullable = false)
