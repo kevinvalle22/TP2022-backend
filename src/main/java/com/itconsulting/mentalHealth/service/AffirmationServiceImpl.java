@@ -40,7 +40,7 @@ public class AffirmationServiceImpl implements AffirmationService {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(affirmation.getAffirmationDate());
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         affirmation.setDayOfTheWeek(String.valueOf(dayOfWeek1));
         return affirmationRepository.save(affirmation);
@@ -60,7 +60,7 @@ public class AffirmationServiceImpl implements AffirmationService {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(affirmation.getAffirmationDate());
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         affirmation.setDayOfTheWeek(String.valueOf(dayOfWeek1));
         return  affirmationRepository.save(affirmation1);
