@@ -13,6 +13,9 @@ public interface SleepRecordService {
 
     SleepRecord getSleepRecordByIdAndUserId(Long sleepRecordId,Long userId);
     SleepRecord updateSleepRecordById(SleepRecord sleepRecord,Long sleepRecordId, Long userId);
+
+    SleepRecord getTheDayOfWeek(Long sleepRecordId, Long userId);
+
     SleepRecord saveSleepRecord(SleepRecord sleepRecord, Long userId);
 
     ResponseEntity<?> deleteSleepRecord(Long sleepRecordId, Long userId);

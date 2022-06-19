@@ -10,28 +10,21 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "sleep_record")
+@Table(name = "afirmations")
 @Data
-public class SleepRecord {
-
+public class Affirmation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(name = "startDate", nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date startDate;
-    @Column(name = "endDate", nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date endDate;
-
-    @Column(name = "duration", nullable = false)
-    @JsonIgnore
-    private String duration;
-    @Column(name = "dayOfTheWeek")
+    @Column(name = "message", nullable = false)
+    private String message;
+    @Column(name = "dayOfTheWeek", nullable = false)
     @JsonIgnore
     private String dayOfTheWeek;
+    @Column(name = "affirmationDate", nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private Date affirmationDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
