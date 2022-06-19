@@ -26,7 +26,7 @@ public class Reminder{
 
     @Column(name = "message", nullable = false,length = 256)
     private  String message;
-    @Column(name = "mondayActive", nullable = false,length = 256)
+   /* @Column(name = "mondayActive", nullable = false,length = 256)
     private  Boolean mondayActive;
     @Column(name = "tuesdayActive", nullable = false,length = 256)
     private  Boolean tuesdayActive;
@@ -40,7 +40,7 @@ public class Reminder{
     private  Boolean saturdayActive;
     @Column(name = "sundayActive", nullable = false,length = 256)
     private  Boolean sundayActive;
-    
+    */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

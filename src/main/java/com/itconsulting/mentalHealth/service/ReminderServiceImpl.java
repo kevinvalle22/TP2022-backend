@@ -44,6 +44,7 @@ public class ReminderServiceImpl implements ReminderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Reminder", "Id", reminderId));
         reminder1.setReminderDate(reminder.getReminderDate());
         reminder1.setMessage(reminder.getMessage());
+        /*
         reminder1.setMondayActive(reminder.getMondayActive());
         reminder1.setTuesdayActive(reminder.getTuesdayActive());
         reminder1.setWednesdayActive(reminder.getWednesdayActive());
@@ -51,6 +52,8 @@ public class ReminderServiceImpl implements ReminderService {
         reminder1.setFridayActive(reminder.getFridayActive());
         reminder1.setSaturdayActive(reminder.getSaturdayActive());
         reminder1.setSundayActive(reminder.getSundayActive());
+        */
+
         return reminderRepository.save(reminder1);
 
 

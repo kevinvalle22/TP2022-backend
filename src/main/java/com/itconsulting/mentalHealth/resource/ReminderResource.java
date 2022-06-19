@@ -12,7 +12,7 @@ public class ReminderResource {
     private  String message;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date reminderDate;
-
+/*
     private  Boolean mondayActive;
 
     private  Boolean tuesdayActive;
@@ -26,4 +26,6 @@ public class ReminderResource {
     private  Boolean saturdayActive;
 
     private  Boolean sundayActive;
+    */
+
 }
