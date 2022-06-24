@@ -22,6 +22,8 @@ public class SleepRecord {
     @Column(name = "startDate", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date startDate;
+    @Column(name = "message", nullable = false)
+    private String message;
     @Column(name = "endDate", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date endDate;

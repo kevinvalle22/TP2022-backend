@@ -26,7 +26,12 @@ public class Goal {
     private Date startDate;
     @Column(name = "status", nullable = false)
     private String status;
-
+    @Column(name = "actionPlan1", nullable = false, length=256)
+    private String actionPlan1;
+    @Column(name = "actionPlan2", nullable = false, length=256)
+    private String actionPlan2;
+    @Column(name = "actionPlan3", nullable = false, length=256)
+    private String actionPlan3;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 @Service
 public class AffirmationServiceImpl implements AffirmationService {
@@ -39,7 +41,8 @@ public class AffirmationServiceImpl implements AffirmationService {
 
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(affirmation.getAffirmationDate());
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        Date localTime = affirmation.getAffirmationDate();
+        int dayOfWeek = localTime.getDay();
         DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         affirmation.setDayOfTheWeek(String.valueOf(dayOfWeek1));
@@ -57,9 +60,17 @@ public class AffirmationServiceImpl implements AffirmationService {
         Affirmation affirmation1 = affirmationRepository.findById(affirmationId).orElseThrow(() -> new ResourceNotFoundException("Exercise Registry"));
         affirmation1.setAffirmationDate(affirmation.getAffirmationDate());
         affirmation1.setMessage(affirmation.getMessage());
+        affirmation1.setMondayActive(affirmation.getMondayActive());
+        affirmation1.setTuesdayActive(affirmation.getTuesdayActive());
+        affirmation1.setWednesdayActive(affirmation.getWednesdayActive());
+        affirmation1.setThursdayActive(affirmation.getThursdayActive());
+        affirmation1.setFridayActive(affirmation.getFridayActive());
+        affirmation1.setSaturdayActive(affirmation.getSaturdayActive());
+        affirmation1.setSundayActive(affirmation.getSundayActive());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(affirmation.getAffirmationDate());
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        Date localTime = affirmation.getAffirmationDate();
+        int dayOfWeek = localTime.getDay();
         DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         affirmation.setDayOfTheWeek(String.valueOf(dayOfWeek1));

@@ -49,14 +49,20 @@ public class SleepRecordServiceImpl implements SleepRecordService {
 
         result.setStartDate(sleepRecord.getStartDate());
         result.setEndDate(sleepRecord.getEndDate());
+        result.setMessage(sleepRecord.getMessage());
         // use start date and end date to calculate duration in hours
-        Date startDate = sleepRecord.getStartDate();
-        Date endDate = sleepRecord.getEndDate();
-        long duration = (endDate.getTime() - startDate.getTime()) / (60 * 60 * 1000);
-        // convert to String
-        String durationString = String.valueOf(duration);
-        result.setDuration(durationString);
-        result.setDayOfTheWeek(String.valueOf(sleepRecord.getStartDate().getDay()));
+        float time_difference= sleepRecord.getEndDate().getHours() - sleepRecord.getStartDate().getHours();
+        float time_differentiates= sleepRecord.getEndDate().getMinutes() - sleepRecord.getStartDate().getMinutes();
+
+        float minutes =  time_differentiates/100;
+        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
+        String durationString= String.valueOf(time_difference+minutes);
+        sleepRecord.setDuration(durationString);
+        int dayOfWeek = sleepRecord.getStartDate().getDay();
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
+        //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
+        result.setDayOfTheWeek(String.valueOf(dayOfWeek1));;
+
         return sleepRecordRepository.save(result);
     }
     @Override
@@ -66,10 +72,10 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         // get the day of week
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(sleepRecord.getStartDate());
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+        int dayOfWeek = sleepRecord.getStartDate().getDay();
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
-        sleepRecord.setDayOfTheWeek(String.valueOf(dayOfWeek1));
+        sleepRecord.setDayOfTheWeek(String.valueOf(dayOfWeek1));;
 
 
 
@@ -81,11 +87,12 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         sleepRecord.setUser(user);
 
         // use start date and end date to calculate duration in hours
-        Date startDate = sleepRecord.getStartDate();
-        Date endDate = sleepRecord.getEndDate();
-        long duration = (endDate.getTime() - startDate.getTime()) / (60 * 60 * 1000);
-        // convert to String
-        String durationString = String.valueOf(duration);
+        float time_difference= sleepRecord.getEndDate().getHours() - sleepRecord.getStartDate().getHours();
+        float time_differentiates= sleepRecord.getEndDate().getMinutes() - sleepRecord.getStartDate().getMinutes();
+
+        float minutes =  time_differentiates/100;
+        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
+        String durationString= String.valueOf(time_difference+minutes);
         sleepRecord.setDuration(durationString);
       
         return sleepRecordRepository.save(sleepRecord);

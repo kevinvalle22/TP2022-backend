@@ -44,6 +44,10 @@ public class GoalServiceImpl implements GoalService {
         goal1.setStartDate(goal.getStartDate());
         goal1.setMessage(goal.getMessage());
         goal1.setStatus(goal.getStatus());
+        goal1.setActionPlan1(goal.getActionPlan1());
+        goal1.setActionPlan2(goal.getActionPlan2());
+        goal1.setActionPlan2(goal.getActionPlan3());
+
         return goalRepository.save(goal1);
     }
 

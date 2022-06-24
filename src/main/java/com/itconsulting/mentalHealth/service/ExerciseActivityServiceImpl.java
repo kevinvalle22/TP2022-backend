@@ -43,8 +43,8 @@ public class ExerciseActivityServiceImpl implements ExerciseActivityService {
         // using the calendar class to get the day of the week with startDate
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(exerciseActivity.getStartDate());
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+        int dayOfWeek = exerciseActivity.getStartDate().getDay();
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         exerciseActivity.setDayOfTheWeek(String.valueOf(dayOfWeek1));
 
@@ -70,13 +70,18 @@ public class ExerciseActivityServiceImpl implements ExerciseActivityService {
          exerciseActivity1.setStartDate(exerciseActivity.getStartDate());
          exerciseActivity1.setEndDate(exerciseActivity.getEndDate());
          exerciseActivity1.setMessage(exerciseActivity.getMessage());
-        long duration = (exerciseActivity.getEndDate().getTime() - exerciseActivity.getStartDate().getTime()) / (60 * 60 * 1000);
-        String durationString= String.valueOf(duration);
-         exerciseActivity1.setDuration(durationString);
+        float time_difference= exerciseActivity.getEndDate().getHours() - exerciseActivity.getStartDate().getHours();
+        float time_differentiates= exerciseActivity.getEndDate().getMinutes() - exerciseActivity.getStartDate().getMinutes();
+
+        float minutes =  time_differentiates/100;
+        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
+        String durationString= String.valueOf(time_difference+minutes);
+        exerciseActivity.setDuration(durationString);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(exerciseActivity.getStartDate());
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek-1);
+
+        int dayOfWeek = exerciseActivity.getStartDate().getDay();
+        DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         exerciseActivity.setDayOfTheWeek(String.valueOf(dayOfWeek1));
         return exerciseActivityRepository.save(exerciseActivity1);
@@ -85,12 +90,15 @@ public class ExerciseActivityServiceImpl implements ExerciseActivityService {
     @Override
     public ExerciseActivity saveExerciseActivity(ExerciseActivity exerciseActivity, Long userId) {
         exerciseActivity.setUser(userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId)));
-        Date startDate = exerciseActivity.getStartDate();
-        Date endDate = exerciseActivity.getEndDate();
-        long duration = (endDate.getTime() - startDate.getTime()) / (60 * 60 * 1000);
-        String durationString = String.valueOf(duration);
-        exerciseActivity.setDuration(durationString);
 
+        float time_difference= exerciseActivity.getEndDate().getHours() - exerciseActivity.getStartDate().getHours();
+        float time_differentiates= exerciseActivity.getEndDate().getMinutes() - exerciseActivity.getStartDate().getMinutes();
+
+        float minutes =  time_differentiates/100;
+        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
+        String durationString= String.valueOf(time_difference+minutes);
+        exerciseActivity.setDuration(durationString);
+        System.out.println(time_difference + minutes);
         return exerciseActivityRepository.save(exerciseActivity);
     }
 
