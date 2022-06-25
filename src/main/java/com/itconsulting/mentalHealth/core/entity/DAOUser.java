@@ -36,7 +36,7 @@ public class DAOUser {
     @Column(name = "district", nullable = false)
     private String district;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "role_Id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

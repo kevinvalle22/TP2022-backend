@@ -27,7 +27,7 @@ public class ThoughtRecord extends AuditModel{
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     @CreatedDate
     private Date createdAt;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

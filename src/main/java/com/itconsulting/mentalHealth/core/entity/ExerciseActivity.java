@@ -33,7 +33,7 @@ public class ExerciseActivity {
     private String dayOfTheWeek;
     @Column(name = "message", nullable = false)
     private String message;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

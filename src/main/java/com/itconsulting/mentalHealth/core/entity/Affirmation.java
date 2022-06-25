@@ -40,7 +40,7 @@ public class Affirmation {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date affirmationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
