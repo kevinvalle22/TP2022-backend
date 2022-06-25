@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class MoodTrackerResource {
-
+    private Long id;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date moodTrackerDate;
 

@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class ThoughtRecordResource {
 
-
+    private Long id;
     private String message;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")

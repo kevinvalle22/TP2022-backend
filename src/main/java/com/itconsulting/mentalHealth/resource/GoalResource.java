@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class GoalResource {
-
+    private Long id;
     private String type;
 
     private String message;

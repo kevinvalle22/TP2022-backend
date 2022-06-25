@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 public class ReminderResource {
-
+    private Long id;
     private  String message;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date reminderDate;

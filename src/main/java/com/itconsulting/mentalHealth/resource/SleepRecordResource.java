@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 public class SleepRecordResource {
-
+    private Long id;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date startDate;
