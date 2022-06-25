@@ -50,14 +50,14 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         result.setStartDate(sleepRecord.getStartDate());
         result.setEndDate(sleepRecord.getEndDate());
         result.setMessage(sleepRecord.getMessage());
-        // use start date and end date to calculate duration in hours
-        float time_difference= sleepRecord.getEndDate().getHours() - sleepRecord.getStartDate().getHours();
-        float time_differentiates= sleepRecord.getEndDate().getMinutes() - sleepRecord.getStartDate().getMinutes();
 
-        float minutes =  time_differentiates/100;
-        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
-        String durationString= String.valueOf(time_difference+minutes);
-        sleepRecord.setDuration(durationString);
+        int time_difference= Math.toIntExact(sleepRecord.getEndDate().getTime() - sleepRecord.getStartDate().getTime());
+
+
+        time_difference =  Math.toIntExact(time_difference/3600000);
+
+        String durationString= String.valueOf((time_difference));
+        result.setDuration(durationString);
         int dayOfWeek = sleepRecord.getStartDate().getDay();
         DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
         //DayOfWeek dayOfWeek1 = DayOfWeek.of(dayOfWeek);
@@ -86,13 +86,13 @@ public class SleepRecordServiceImpl implements SleepRecordService {
         DAOUser user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
         sleepRecord.setUser(user);
 
-        // use start date and end date to calculate duration in hours
-        float time_difference= sleepRecord.getEndDate().getHours() - sleepRecord.getStartDate().getHours();
-        float time_differentiates= sleepRecord.getEndDate().getMinutes() - sleepRecord.getStartDate().getMinutes();
 
-        float minutes =  time_differentiates/100;
-        System.out.print("las horas son "+time_difference + " y los minutos"+minutes);
-        String durationString= String.valueOf(time_difference+minutes);
+        int time_difference= Math.toIntExact(sleepRecord.getEndDate().getTime() - sleepRecord.getStartDate().getTime());
+
+
+        time_difference =  Math.toIntExact(time_difference/3600000);
+
+        String durationString= String.valueOf((time_difference));
         sleepRecord.setDuration(durationString);
       
         return sleepRecordRepository.save(sleepRecord);
